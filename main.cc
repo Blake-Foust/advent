@@ -19,6 +19,71 @@ std::unordered_map<char, int> rps{
     {'Z',3}, //Scissor
 };
 
+// 
+std::unordered_map<char, int> alpha{
+    {'a',1},
+    {'b',2},
+    {'c',3},
+    {'d',4},
+    {'e',5},
+    {'f',6},
+    {'g',7},
+    {'h',8},
+    {'i',9},
+    {'j',10},
+    {'k',11},
+    {'l',12},
+    {'m',13},
+    {'n',14},
+    {'o',15},
+    {'p',16},
+    {'q',17},
+    {'r',18},
+    {'s',19},
+    {'t',20},
+    {'u',21},
+    {'v',22},
+    {'w',23},
+    {'x',24},
+    {'y',25},
+    {'z',26},
+};
+
+int rucksack(std::string& l1, std::string& l2){
+    int result = 0;
+    for(auto x : l1){
+        for(auto y : l2){
+            if(x==y){
+                if(isupper(x)){
+                    
+                    return result = alpha.find(tolower(x))->second + 26;
+                }
+                else
+                    return result = alpha.find(x)->second;
+            }
+        }
+    }
+    return 0;
+}
+
+void advent3(){
+    std::ifstream myfile; myfile.open("input3.txt");
+    std::string line;
+    int rucksacks = 0;
+
+    if(myfile.is_open()){
+        while(std::getline(myfile,line)){
+            int endLine = line.length()-1;
+            std::string line1 = line.substr(0,line.length()/2);
+            std::string line2 = line.substr(endLine/2+1, endLine);
+            std::sort(line1.begin(), line1.end());
+            std::sort(line2.begin(),line2.end()); 
+            rucksacks += rucksack(line1,line2); 
+        }
+        std::cout << rucksacks << std::endl;
+    }
+}
+
 void advent2(){
     std::ifstream myfile; myfile.open("input2.txt");
     std::string line;
@@ -72,5 +137,6 @@ void advent1(){
 int main(int argc, char** argv)
 {
     //advent1();
-    advent2();
+    //advent2();
+    advent3();
 }
