@@ -1,3 +1,4 @@
+#include <vector>
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -64,6 +65,47 @@ int rucksack(std::string& l1, std::string& l2){
         }
     }
     return 0;
+}
+
+void assignment(std::string& ass, std::string& line, std::vector<int>& vbuffer){
+    std::string sbuffer{};
+    int i = 0; 
+
+    vbuffer.clear();
+    for(int j = 0; j < 4; j++){
+        while(i < line.length()){
+                if(line[i] != '-' && line[i] != ','){
+                    sbuffer += line[i];
+                    i++;
+                }
+                else 
+                {
+                    i++;
+                    break;
+                }
+        }
+        vbuffer.push_back(std::stoi(sbuffer));
+        sbuffer.clear();
+    }
+}
+
+
+void advent4(){
+    std::ifstream file; file.open("input4.txt");
+    std::vector<int> vbuffer{};
+    std::string ass;    
+    std::string line;
+    int pair = 0;
+    if(file.is_open()){    
+        while(std::getline(file,line)){
+            assignment(ass,line, vbuffer);
+            if((vbuffer[0] <= vbuffer[2])&&(vbuffer[1] >= vbuffer[3])||
+               (vbuffer[2] <= vbuffer[0])&&(vbuffer[3] >= vbuffer[1])){
+                    pair += 1;
+                }
+            }
+        }
+        std::cout << "RESULT: " << pair << std::endl;
 }
 
 void advent3(){
@@ -138,5 +180,6 @@ int main(int argc, char** argv)
 {
     //advent1();
     //advent2();
-    advent3();
+    //advent3();
+    advent4();
 }
