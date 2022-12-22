@@ -1,3 +1,4 @@
+#include <limits>
 #include <vector>
 #include <iostream>
 #include <algorithm>
@@ -6,6 +7,10 @@
 #include <unordered_map>
 #include <typeinfo>
 #include <unistd.h>
+#include <queue>
+#include <sstream>
+#include <chrono>
+#include <list>
 
 // Rock paper scissors score map
 // Paper beats rock 2 beats 1
@@ -87,6 +92,102 @@ void assignment(std::string& ass, std::string& line, std::vector<int>& vbuffer){
         vbuffer.push_back(std::stoi(sbuffer));
         sbuffer.clear();
     }
+}
+std::vector<std::vector<char>> crates{
+    {'R','S','L','F','Q'},
+    {'N','Z','Q','G','P','T'},
+    {'S','M','Q','B'},
+    {'T','G','Z','J','H','C','B','Q'},
+    {'P','H','M','B','N','F','S'},
+    {'P','C','Q','N','S','L','V','G'},
+    {'W','C','F'},
+    {'Q','H','G','Z','W','V','P','M'},
+    {'G','Z','D','L','C','N','R'},
+};
+
+
+void printCrates(){
+    for(int i = 0; i < crates.size(); i++){
+        std::cout << "Crates " << i << std::endl;
+        for(int  j = 0; j < crates[i].size(); j++){
+            
+            std::cout << crates[i][j] << std::endl;
+        }
+        std::cout << "" << std::endl; 
+    }
+}
+void moveCrates9001(std::vector<int>& crateAction){
+    //move from to [0], [1], [2]
+    char crat{};
+    std::vector<char> crate{};
+    for(int i = 0; i < crateAction[0]+1; i++){
+        if(!(crates[crateAction[1]].empty())){
+            crat = crates[crateAction[1]].back();
+            crate.insert(crate.begin(),crat);
+            crates[crateAction[1]].pop_back();
+        }
+    }
+    for(int i = 0; i < crate.size(); i++){
+        crates[crateAction[2]].push_back(crate[i]);
+    }
+}
+
+void moveCrates9000(std::vector<int>& crateAction){        
+        //move from to [0], [1], [2]
+        char crate{};
+        for(int i = 0; i < crateAction[0]+1; i++){
+            if(!(crates[crateAction[1]].empty()))
+            {
+                crate = crates[crateAction[1]].back();
+                crates[crateAction[2]].push_back(crate);
+                crates[crateAction[1]].pop_back();
+            }
+
+      }
+}
+
+std::fstream& GoToLine(std::fstream& file, unsigned int num){
+    file.seekg(std::ios::beg);
+    for(int i = 0; i < num - 1; ++i){
+        file.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+
+    }
+    return file;
+}
+
+
+void advent5()
+{
+    std::fstream file; file.open("input5.txt");
+    std::stringstream ss;
+    std::vector<int> buffer{};
+    
+    GoToLine(file, 11);
+    std::string line{};
+    std::string temp{};
+    int found = 0;
+    std::vector<int> lineDigits;
+    if(file.is_open()){
+        while(getline(file,line)){
+            ss << line;
+            while(!ss.eof()){
+                ss >> temp;
+
+                if(std::stringstream(temp) >> found){
+                    lineDigits.push_back(found - 1);
+                }
+                
+            }
+            ss.clear();
+
+            
+            moveCrates9001(lineDigits); 
+            std::cout << "#############################" << std::endl;
+            printCrates();
+            lineDigits.clear();
+        }
+    }
+    printCrates();
 }
 
 
@@ -181,5 +282,6 @@ int main(int argc, char** argv)
     //advent1();
     //advent2();
     //advent3();
-    advent4();
+    //advent4();
+    advent5();
 }
