@@ -296,9 +296,6 @@ void advent6(){
 
         list_4[line[p1]]++;
 
-        
-        std::cout << line[p1] << "CHEAT" << std::endl;
-
         countTrack++;
         while(list_4[line[p1]] > 1){
             list_4[line[p2]]--;
@@ -308,12 +305,8 @@ void advent6(){
         if(countTrack ==4)
             break; 
     } 
-    std::cout << line[p1+1] << std::endl;
-    for(auto const& [key,val] : list_4){
-        std::cout << key << " Key \n";
-        std::cout << val << " Val \n";
-        std::cout << p1 + 1<< std::endl;
-    }
+    
+    std::cout << p1 + 1 << " Is The Answer" << std::endl;
 
 };
 
