@@ -1,5 +1,6 @@
 #include <limits>
 #include <vector>
+#include <set>
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -277,11 +278,52 @@ void advent1(){
    std::cout << "Result: " << result << std::endl;
 };
 
+
+void advent6(){
+    std::unordered_map<char, int> list_4{};
+    
+    std::ifstream myfile; myfile.open("6.txt");
+    std::string line{};
+
+    if(myfile.is_open()){
+        while(std::getline(myfile,line)){
+        }
+    }
+    int p1 = 0, p2 = 0;
+    int countTrack = 0;    
+    std::string placeholder{};
+    for(; p1 < line.size(); p1++){
+
+        list_4[line[p1]]++;
+
+        
+        std::cout << line[p1] << "CHEAT" << std::endl;
+
+        countTrack++;
+        while(list_4[line[p1]] > 1){
+            list_4[line[p2]]--;
+            countTrack--;
+            p2++;
+        }
+        if(countTrack ==4)
+            break; 
+    } 
+    std::cout << line[p1+1] << std::endl;
+    for(auto const& [key,val] : list_4){
+        std::cout << key << " Key \n";
+        std::cout << val << " Val \n";
+        std::cout << p1 + 1<< std::endl;
+    }
+
+};
+
+
 int main(int argc, char** argv)
-{
+{   
+    advent6();
     //advent1();
     //advent2();
     //advent3();
     //advent4();
-    advent5();
+    //advent5();
 }
