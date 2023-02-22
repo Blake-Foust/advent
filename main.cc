@@ -26,7 +26,6 @@ std::unordered_map<char, int> rps{
     {'Z',3}, //Scissor
 };
 
-// 
 std::unordered_map<char, int> alpha{
     {'a',1},
     {'b',2},
