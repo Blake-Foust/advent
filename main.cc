@@ -1,3 +1,4 @@
+#include <type_trait>
 #include <limits>
 #include <vector>
 #include <set>
