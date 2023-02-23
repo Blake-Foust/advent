@@ -312,7 +312,7 @@ void advent6(){
 
 int main(int argc, char** argv)
 {   
-    advent6();
+    //advent6();
     //advent1();
     //advent2();
     //advent3();
